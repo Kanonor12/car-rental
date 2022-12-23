@@ -6,6 +6,9 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 // Internal imports
 import { mongoDBConnect } from './databases/mongoDBConnect.js';
+import userRoute from './routes/userRoutes.js';
+import carRoute from './routes/carRoutes.js';
+import authRoute from './routes/authRoutes.js';
 
 dotenv.config()
 
@@ -24,7 +27,11 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: false }))
 app.use(express.urlencoded({extended: false}));
 app.use(cors())
 
-//app.use('/posts', router)
+app.use('/api/auth', authRoute)
+app.use('/api/cars', carRoute)
+app.use("/api/users", userRoute);
+
+
 
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;
@@ -36,7 +43,7 @@ app.use((err, req, res, next) => {
         message: errorMessage,
         stack: err.stack,
     })
-})
+}) 
 
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`)
