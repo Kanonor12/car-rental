@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     birthday: {
         day: {
           type: Number,
-          required: true,
+          required: true,          
         },
         month: {
           type: Number,
