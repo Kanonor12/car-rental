@@ -1,20 +1,23 @@
 import express from 'express';
-import { deleteCar, getAllCars, getCar, updateCar } from '../controllers/carControllers.js';
+import { addCar, deleteCar, getAllCars, getCar, updateCar } from '../controllers/carControllers.js';
 
 
 
 const router = express.Router();
 
-// Get Users
+// Add car
+router.post('/', addCar);
+
+// Get Cars
 router.get('/', getAllCars);
 
-// Get User
+// Get Car
 router.get('/:id', getCar);
 
-// Update User
+// Update Car
 router.put('/:id', updateCar);
 
-// Delete User
+// Delete Car
 router.delete('/:id', deleteCar);
 
 export default router;

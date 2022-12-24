@@ -1,43 +1,62 @@
+import Car from '../models/Car.js'
 
 
-export const getAllCars = (req,res,next) => {
+export const addCar = async (req,res,next) => {
+
+    const newCar = new Car(req.body)
 
     try {
-        console.log('Getting all users')
-        res.status(200).json('Get all cars')
+        const savedCar = await newCar.save()
+        res.status(200).json(savedCar)
     } catch (error) {
         next(error)
     }
     
 }
 
-export const getCar = (req,res,next) => {
+export const getAllCars = async (req,res,next) => {
 
     try {
-        console.log('Getting single user')
-        res.status(200).json('Get single cars')
+        const cars = await Car.find()
+        res.status(200).json(cars)
+    } catch (error) {
+        next(error)
+    }
+    
+}
+
+export const getCar = async (req,res,next) => {
+
+    try {
+        const car = await Car.findById(req.params.id)
+        res.status(200).json(car)
     } catch (error) {
         next(error) 
     }
  
 }
 
-export const updateCar = (req,res,next) => {
+export const updateCar = async (req,res,next) => {
 
     try {
-         console.log('Updating single user')
-         res.status(200).json('Car has been updated')
+        const updatedCar = await Car.findByIdAndUpdate(
+            req.params.id,
+            {$set: req.body},
+            {new: true}
+        )
+         console.log(updatedCar)
+         res.status(200).json(updatedCar)
     } catch (error) {
         next(error)
     }
    
 }
 
-export const deleteCar = (req,res,next) => {
+export const deleteCar = async (req,res,next) => {
 
     try {
-        console.log('Deleting single user')
-        res.status(200).json('Car has been deleted')
+        const deletedCar = await Car.findByIdAndDelete(req.params.id)
+        res.status(200).json(`The following Car has been deleted ${deletedCar.brand} ${deletedCar.model}`)
     } catch (error) {
         next(error)
     }
