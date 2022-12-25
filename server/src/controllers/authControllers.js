@@ -1,10 +1,20 @@
+import User from '../models/User.js'
+import bcrypt from 'bcryptjs';
 
-
-export const register = (req,res,next) => {
+export const register = async (req,res,next) => {
 
     try {
-        console.log('Registering user')
-        res.status(200).json('User registration successful')
+
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(req.body.password, salt);
+
+        const newUser = new User({
+            ...req.body,
+            password: hashedPassword,
+        })
+       
+        const savedUser = await newUser.save();
+        res.status(200).json(savedUser)
     } catch (error) {
         next(error)
     }

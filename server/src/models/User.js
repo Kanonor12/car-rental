@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     birthday: {
         day: {
           type: Number,
-          required: true,
+          required: true,          
         },
         month: {
           type: Number,
@@ -35,7 +35,6 @@ const UserSchema = new Schema({
     },
     image: {
         type: String,
-        required: true,
     },
     phoneNumber: {
         type: String,

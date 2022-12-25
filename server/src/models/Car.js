@@ -25,7 +25,6 @@ const CarSchema = new Schema({
     },
     images: {
         type: [String],
-        required: true,
     },
     distance: {
         type: String,
@@ -45,9 +44,6 @@ const CarSchema = new Schema({
     },
     availability: {
         type: Boolean,
-        unavailableDates: {
-            type: [date],
-        },
         default: true,
     },
     rating: {
