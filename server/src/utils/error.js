@@ -6,3 +6,5 @@ export const manageError = (status, message) => {
 
     return err;
 }
+
+//export default manageError;

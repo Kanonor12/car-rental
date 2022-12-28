@@ -3,6 +3,12 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const CarSchema = new Schema({
+
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+      },
     title: {
         type: String,
         required: true,
